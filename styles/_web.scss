@@ -360,6 +360,106 @@
   }
 }
 
+// ── Cert cards (new section — same hover as stack cards) ──
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.cert-card {
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1.2),
+    box-shadow 0.25s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+
+  &.completed {
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+  }
+
+  &.pending {
+    border: 1px dashed var(--rule);
+    background: transparent;
+  }
+
+  .cert-issuer {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .cert-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+  }
+
+  .cert-title {
+    font-size: 13.5px;
+  }
+
+  &.pending .cert-title {
+    color: var(--muted);
+  }
+
+  .cert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 6px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-md);
+    background: var(--paper);
+    border-color: var(--ink);
+
+    &::before {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+
+    .cert-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 // ── Web ask widget ──
 .ask {
   border: 1px solid var(--line);

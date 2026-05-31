@@ -8,6 +8,7 @@ import ResumeApp from './apps/ResumeApp';
 import ContactApp from './apps/ContactApp';
 import SettingsApp from './apps/SettingsApp';
 import TrashApp from './apps/TrashApp';
+import CertsApp from './apps/CertsApp';
 
 declare global {
   interface Window { __desktopApi?: DesktopApi; }
@@ -18,6 +19,7 @@ const APPS = [
   { id: 'about',    name: 'About',    glyph: 'A',  size: { w: 720, h: 520 } },
   { id: 'projects', name: 'Work',     glyph: '▤',  size: { w: 720, h: 560 } },
   { id: 'resume',   name: 'Resume',   glyph: 'CV', size: { w: 640, h: 580 } },
+  { id: 'certs',    name: 'Certs',    glyph: '✓',  size: { w: 600, h: 560 } },
   { id: 'contact',  name: 'Contact',  glyph: '@',  size: { w: 520, h: 460 } },
   { id: 'terminal', name: 'Terminal', glyph: '_',  size: { w: 680, h: 440 } },
   { id: 'settings', name: 'Settings', glyph: '⚙',  size: { w: 540, h: 580 } },
@@ -26,7 +28,7 @@ const APPS = [
 
 type AppId = (typeof APPS)[number]['id'] | `project:${string}`;
 
-const DESKTOP_ICON_IDS: string[] = ['about', 'projects', 'resume', 'contact', 'trash'];
+const DESKTOP_ICON_IDS: string[] = ['about', 'projects', 'resume', 'certs', 'contact', 'trash'];
 
 // ── Grid constants ────────────────────────────────────────────────
 const GRID_COL = 90, GRID_ROW = 92, GRID_PAD_X = 18, GRID_PAD_Y = 18;
@@ -236,7 +238,7 @@ function ContextMenu({ menu, onClose }: ContextMenuProps) {
 }
 
 // ── Dock ──────────────────────────────────────────────────────────
-const DOCK_APPS = APPS.filter((a) => !['trash', 'settings'].includes(a.id));
+const DOCK_APPS = APPS.filter((a) => !['trash', 'settings', 'certs'].includes(a.id));
 
 function Dock({ openApp, runningIds }: { openApp: (id: string) => void; runningIds: string[] }) {
   return (
@@ -355,6 +357,7 @@ export default function Desktop({ wallpaper, themeApi }: Props) {
     if (id === 'projects') return <ProjectsApp openWindow={openApp} />;
     if (id === 'resume')   return <ResumeApp />;
     if (id === 'contact')  return <ContactApp />;
+    if (id === 'certs')    return <CertsApp />;
     if (id === 'trash')    return <TrashApp />;
     if (id === 'terminal') return <Terminal themeApi={api} />;
     if (id === 'settings') return <SettingsApp api={api} />;

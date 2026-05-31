@@ -158,13 +158,16 @@ export default function App() {
     if (localStorage.getItem('aneesh:sysnotif') !== '1') setShowSysNotif(true);
   }, []);
 
-  // Apply theme/variant/accent to <html> and mode to <body>
+  // Apply theme/variant/accent to <html>, mode to <body>, wallpaper to <body> in web mode
   useEffect(() => {
     document.documentElement.dataset.theme = t.dark ? 'dark' : 'light';
     document.documentElement.dataset.variant = t.variant;
     document.documentElement.style.setProperty('--accent', t.accent);
     document.body.dataset.mode = mode;
-  }, [t.dark, t.variant, t.accent, mode]);
+    // Wallpaper pattern only in web mode (desktop renders its own .wallpaper div)
+    const wp = t.showGrid ? 'grid' : t.wallpaper;
+    document.body.className = mode === 'web' ? `wp-${wp}` : '';
+  }, [t.dark, t.variant, t.accent, t.wallpaper, t.showGrid, mode]);
 
   const themeApi = useMemo<ThemeApi>(() => ({
     setTheme: (v) => setTweak('dark', v === 'dark'),
@@ -180,30 +183,41 @@ export default function App() {
 
   // Keyboard shortcuts
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      const tag = (e.target as HTMLElement)?.tagName ?? '';
-      if ((tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable)) {
-        if (!((e.metaKey || e.ctrlKey) && (e.key === 'e' || e.key === '.'))) return;
+    function closeTopWindow() {
+      const wins = Array.from(document.querySelectorAll<HTMLElement>('.window'));
+      let top: HTMLElement | null = null, topZ = -1;
+      for (const w of wins) {
+        const z = parseInt(w.style.zIndex || '0', 10);
+        if (z > topZ) { topZ = z; top = w; }
       }
+      top?.querySelector<HTMLButtonElement>('.tlight.close')?.click();
+    }
+
+    function onKey(e: KeyboardEvent) {
       const mod = e.metaKey || e.ctrlKey;
+      const tag = (e.target as HTMLElement)?.tagName ?? '';
+      const inInput = tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable;
+
+      // Escape — close top window in desktop mode (no modifier, not in input)
+      if (e.key === 'Escape' && mode === 'os' && !inInput) {
+        closeTopWindow();
+        return;
+      }
+
+      if (inInput) {
+        // Allow ⌘E (mode toggle) and ⌘. (reorganize) even inside inputs
+        if (!(mod && (e.key === 'e' || e.key === '.'))) return;
+      }
+
       if (!mod) return;
       const k = e.key.toLowerCase();
+
       if (k === 'e') { e.preventDefault(); setMode(mode === 'os' ? 'web' : 'os'); }
       else if (k === 'd') { e.preventDefault(); setTweak('dark', !t.dark); }
-      else if (k === 't' && mode === 'os') { e.preventDefault(); window.__desktopApi?.openApp('terminal'); }
+      // Ctrl+` — open Terminal (avoids browser ⌘T conflict)
+      else if (e.key === '`' && mode === 'os') { e.preventDefault(); window.__desktopApi?.openApp('terminal'); }
       else if (k === ',' && mode === 'os') { e.preventDefault(); window.__desktopApi?.openApp('settings'); }
       else if (k === '.' && mode === 'os') { e.preventDefault(); window.__desktopApi?.reorganizeIcons(); }
-      else if (k === 'r' && mode === 'os') { e.preventDefault(); window.__desktopApi?.refreshDesktop(); }
-      else if (k === 'w' && mode === 'os') {
-        e.preventDefault();
-        const wins = Array.from(document.querySelectorAll<HTMLElement>('.window'));
-        let top: HTMLElement | null = null, topZ = -1;
-        for (const w of wins) {
-          const z = parseInt(w.style.zIndex || '0', 10);
-          if (z > topZ) { topZ = z; top = w; }
-        }
-        top?.querySelector<HTMLButtonElement>('.tlight.close')?.click();
-      }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -257,7 +271,7 @@ export default function App() {
         <SystemNotif onDismiss={() => { setShowSysNotif(false); localStorage.setItem('aneesh:sysnotif', '1'); }} />
       )}
 
-      <TweaksPanel title="Tweaks">
+      {mode === 'web' && <TweaksPanel title="Tweaks">
         <TweakSection label="Variant" />
         <TweakRadio
           label="Style"
@@ -301,7 +315,7 @@ export default function App() {
           ]}
           onChange={(v) => setMode(v as 'os' | 'web')}
         />
-      </TweaksPanel>
+      </TweaksPanel>}
     </>
   );
 }

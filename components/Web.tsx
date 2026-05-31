@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { complete } from '@/lib/claude';
 import {
-  PROFILE, HERO, CV, STACK, CERTS, PERSONAL_PROJECTS, WORK_PROJECTS,
+  PROFILE, HERO, CV, STACK, PERSONAL_PROJECTS, WORK_PROJECTS,
   COMPLETED_CERTS, PLANNED_CERTS,
 } from '@/lib/data';
 import type { ThemeApi } from '@/lib/types';
@@ -73,40 +73,6 @@ function AskWidget() {
   );
 }
 
-// ── Cert card styles (inlined to avoid editing Phase 2 SCSS) ───────
-const certCardBase: React.CSSProperties = {
-  padding: '14px 16px',
-  borderRadius: 'var(--radius)',
-};
-const certCardDone: React.CSSProperties = {
-  ...certCardBase,
-  border: '1px solid var(--line)',
-  background: 'var(--paper-2)',
-};
-const certCardPending: React.CSSProperties = {
-  ...certCardBase,
-  border: '1px dashed var(--rule)',
-  background: 'transparent',
-};
-const certGridStyle: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-  gap: 12,
-};
-const certIssuerStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 10.5,
-  color: 'var(--muted)',
-  textTransform: 'uppercase',
-  letterSpacing: '0.1em',
-  marginBottom: 4,
-};
-const certSubLabel: React.CSSProperties = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 10,
-  color: 'var(--accent)',
-  marginLeft: 6,
-};
 
 // ── Web ────────────────────────────────────────────────────────────
 interface Props { themeApi: ThemeApi; }
@@ -240,11 +206,12 @@ export default function Web({ themeApi }: Props) {
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 12 }}>
           Completed
         </div>
-        <div style={{ ...certGridStyle, marginBottom: 24 }}>
+        <div className="cert-grid" style={{ marginBottom: 24 }}>
           {COMPLETED_CERTS.map((c) => (
-            <div key={c.title} style={certCardDone}>
-              <div style={certIssuerStyle}>{c.issuer}</div>
-              <div style={{ fontSize: 13.5 }}>{c.title}</div>
+            <div key={c.title} className="cert-card completed">
+              <div className="cert-issuer">{c.issuer}</div>
+              <div className="cert-title">{c.title}</div>
+              {c.link && <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">↗ certificate</a>}
             </div>
           ))}
         </div>
@@ -252,14 +219,15 @@ export default function Web({ themeApi }: Props) {
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 12 }}>
           In progress / planned
         </div>
-        <div style={certGridStyle}>
+        <div className="cert-grid">
           {PLANNED_CERTS.map((c) => (
-            <div key={c.title} style={certCardPending}>
-              <div style={certIssuerStyle}>
+            <div key={c.title} className="cert-card pending" style={{ opacity: c.status === 'planned' ? 0.7 : 1 }}>
+              <div className="cert-issuer">
                 {c.issuer}
-                <span style={certSubLabel}>{c.status === 'in-progress' ? '// in progress' : '// planned'}</span>
+                <span className="cert-status">{c.status === 'in-progress' ? '// in progress' : '// planned'}</span>
               </div>
-              <div style={{ fontSize: 13.5, color: 'var(--muted)' }}>{c.title}</div>
+              <div className="cert-title">{c.title}</div>
+              {c.link && <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">↗ view</a>}
             </div>
           ))}
         </div>

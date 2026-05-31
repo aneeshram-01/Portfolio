@@ -36,6 +36,7 @@ export interface Cert {
   title: string;
   issuer: string;
   status: 'completed' | 'in-progress' | 'planned';
+  link?: string; // certificate URL — user will populate
 }
 
 export interface Post {
