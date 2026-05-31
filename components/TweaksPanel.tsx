@@ -11,7 +11,11 @@ export function useTweaks(defaults: TweakValues): [TweakValues, SetTweak] {
   useEffect(() => {
     try {
       const raw = localStorage.getItem('aneesh:tweaks');
-      if (raw) setValues((prev) => ({ ...prev, ...JSON.parse(raw) }));
+      if (raw) {
+        setValues((prev) => ({ ...prev, ...JSON.parse(raw) }));
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        setValues((prev) => ({ ...prev, dark: false }));
+      }
     } catch {}
   }, []);
 

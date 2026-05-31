@@ -43,7 +43,7 @@ function AskWidget() {
       <div className="ask-bar">
         <span className="lights"><span className="l1" /><span className="l2" /><span className="l3" /></span>
         <span>aneesh@dev — ask</span>
-        <span style={{ opacity: 0.55 }}>stub · offline</span>
+        <span style={{ opacity: 0.55 }}>live · online</span>
       </div>
       <div className="ask-body">
         {hist.map((it, i) => {
@@ -249,7 +249,6 @@ export default function Web({ themeApi }: Props) {
         <p style={{ color: 'var(--muted)', maxWidth: '52ch', marginTop: -8, marginBottom: 18 }}>
           A tiny terminal that knows my CV. Ask anything about what I&apos;ve built,
           what I&apos;d reach for, or why you should hire me.
-          (AI assistant is offline in this build — coming soon.)
         </p>
         <AskWidget />
       </section>

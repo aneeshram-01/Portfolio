@@ -44,12 +44,14 @@ export const metadata: Metadata = {
 const antiFlashScript = `
 try {
   var s = localStorage.getItem('aneesh:tweaks');
+  var el = document.documentElement;
   if (s) {
     var p = JSON.parse(s);
-    var el = document.documentElement;
     if (p.dark !== undefined) el.dataset.theme = p.dark ? 'dark' : 'light';
     if (p.variant) el.dataset.variant = p.variant;
     if (p.accent) el.style.setProperty('--accent', p.accent);
+  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+    el.dataset.theme = 'light';
   }
 } catch(e) {}
 `;
