@@ -195,7 +195,7 @@ export function TweakButton({ label, onClick, secondary = false }: { label: stri
 interface PanelProps { title?: string; children?: React.ReactNode; }
 
 export function TweaksPanel({ title = 'Tweaks', children }: PanelProps) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const dragRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef({ x: 16, y: 16 });
   const PAD = 16;

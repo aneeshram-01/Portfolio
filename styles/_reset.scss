@@ -43,6 +43,48 @@ a {
   color: var(--accent-ink);
 }
 
+// ── Web-mode wallpaper applied via data-wallpaper on <body> ──────
+// Uses a data attribute (not a class) to avoid collision with the
+// .wp-grid layout class in _apps.scss. background-attachment: fixed
+// keeps patterns viewport-relative so they don't shift between sections.
+body[data-wallpaper="dots"] {
+  background-image: radial-gradient(var(--rule) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+}
+
+body[data-wallpaper="grid"] {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-attachment: fixed;
+}
+
+body[data-wallpaper="paper"] {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 28px,
+    color-mix(in oklab, var(--ink) 4%, transparent) 28px 29px
+  );
+  background-attachment: fixed;
+}
+
+// Warm halo: fixed to viewport so the gradient is smooth across all sections.
+// Reduced opacity in dark mode so it doesn't fight the dark paper background.
+body[data-wallpaper="warm"] {
+  background-image:
+    radial-gradient(65% 65% at 80% 20%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 70%),
+    radial-gradient(65% 65% at 15% 80%, color-mix(in oklab, var(--accent) 11%, transparent), transparent 70%);
+  background-attachment: fixed;
+}
+
+[data-theme="dark"] body[data-wallpaper="warm"] {
+  background-image:
+    radial-gradient(65% 65% at 80% 20%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 70%),
+    radial-gradient(65% 65% at 15% 80%, color-mix(in oklab, var(--accent) 7%, transparent), transparent 70%);
+}
+
 // Subtle scrollbars (shared by window bodies, terminal, web view).
 .window-body,
 .term,

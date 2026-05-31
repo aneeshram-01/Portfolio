@@ -43,6 +43,20 @@
 
 // General mobile layout
 @media (max-width: 720px) {
+  // Hero: stack image below h1 on mobile.
+  // Selectors mirror the SCSS-nested desktop specificity exactly so
+  // cascade order (responsive is last) can override them cleanly.
+  .web-hero .web-hero-h1-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .web-hero .web-hero-h1-row .web-hero-headshot {
+    height: 200px;
+    width: 160px;
+    align-self: center;
+  }
   .desktop-icons {
     display: none;
   }

@@ -44,8 +44,8 @@ const FS: Record<string, string> = {
 
   'contact.txt': [
     'email     aneeshram19@gmail.com',
-    'github    github.com/aneeshram-01',
-    'linkedin  linkedin.com/in/aneeshram',
+    'github    github/aneeshram-01',
+    'linkedin  linkedin/aneeshram',
     'phone     +91 7204713308',
   ].join('\n'),
 
@@ -190,6 +190,8 @@ export default function Terminal({ themeApi }: Props) {
       const next = pIdx + 1;
       if (next >= past.length) { setPIdx(-1); setInput(''); }
       else { setPIdx(next); setInput(past[next]); }
+    } else if (e.key === 'Escape') {
+      themeApi.closeApp('terminal');
     } else if (e.key === 'l' && e.ctrlKey) {
       e.preventDefault(); setHistory([]);
     }

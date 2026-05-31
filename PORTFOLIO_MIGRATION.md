@@ -1,4 +1,5 @@
 # Portfolio Migration — Claude Code Execution Plan
+
 > **Aneeshram Bhat · portfolio.vercel.app**  
 > Use this document in Claude Code (Opus mode) to plan and implement the migration end-to-end.
 
@@ -14,16 +15,16 @@ The original source files are in the project context and must be treated as the 
 
 ## Agreed Stack
 
-| Concern | Decision |
-|---|---|
-| Framework | Next.js 14 (App Router) |
-| Language | TypeScript (strict) |
-| Package manager | pnpm |
-| Styling | SCSS with partial file split (migrated from hand-rolled CSS) |
-| Fonts | Google Fonts via `next/font/google` — Instrument Serif, JetBrains Mono, Inter Tight |
-| Deployment | Vercel free tier (`.vercel.app` domain initially) |
-| AI features | UI preserved, `ask` command and Ask widget **stubbed** — no API calls at launch |
-| Content | Real resume data (source of truth: resume attached below) |
+| Concern         | Decision                                                                            |
+| --------------- | ----------------------------------------------------------------------------------- |
+| Framework       | Next.js 14 (App Router)                                                             |
+| Language        | TypeScript (strict)                                                                 |
+| Package manager | pnpm                                                                                |
+| Styling         | SCSS with partial file split (migrated from hand-rolled CSS)                        |
+| Fonts           | Google Fonts via `next/font/google` — Instrument Serif, JetBrains Mono, Inter Tight |
+| Deployment      | Vercel free tier (`.vercel.app` domain initially)                                   |
+| AI features     | UI preserved, `ask` command and Ask widget **stubbed** — no API calls at launch     |
+| Content         | Real resume data (source of truth: resume attached below)                           |
 
 ---
 
@@ -44,18 +45,18 @@ The original source files are in the project context and must be treated as the 
 
 ### Sections — keep / cut / add
 
-| Section | Action | Notes |
-|---|---|---|
-| Hero / About | ✅ Keep | Rewrite content with real data |
-| Experience / CV | ✅ Keep | Reshape as timeline: 1 job + education |
-| Work Projects | ✅ Keep (renamed) | Split into two sub-sections (see below) |
-| Stack | ✅ Keep | Split into 4 categories (see below) |
-| Certifications | ✅ New section | Two states: completed + in progress |
-| Ask me widget | ✅ Keep UI | AI call stubbed |
-| Terminal `ask` command | ✅ Keep UI | AI call stubbed |
-| Writing / Blog | ❌ Remove | No blog content |
-| Photos | ❌ Remove | No photo content |
-| Now / Currently | ❌ Remove | Replaced by real content sections |
+| Section                | Action            | Notes                                   |
+| ---------------------- | ----------------- | --------------------------------------- |
+| Hero / About           | ✅ Keep           | Rewrite content with real data          |
+| Experience / CV        | ✅ Keep           | Reshape as timeline: 1 job + education  |
+| Work Projects          | ✅ Keep (renamed) | Split into two sub-sections (see below) |
+| Stack                  | ✅ Keep           | Split into 4 categories (see below)     |
+| Certifications         | ✅ New section    | Two states: completed + in progress     |
+| Ask me widget          | ✅ Keep UI        | AI call stubbed                         |
+| Terminal `ask` command | ✅ Keep UI        | AI call stubbed                         |
+| Writing / Blog         | ❌ Remove         | No blog content                         |
+| Photos                 | ❌ Remove         | No photo content                        |
+| Now / Currently        | ❌ Remove         | Replaced by real content sections       |
 
 ### Projects section split
 
@@ -63,6 +64,7 @@ The original source files are in the project context and must be treated as the 
 These are internal EG work and have no public links. Describe them under the EG experience entry as project cards or an expandable list. Do **not** create a separate top-level Projects section for these.
 
 Projects to include under EG experience:
+
 - AI Platform (Central) — ASP.NET Core 10, Semantic Kernel, pgvector, Azure Service Bus, Azure Document Intelligence, PostgreSQL, Docker, GitHub Actions
 - ArcSync — Electron, React 18, Zustand, TanStack, C# Minimal APIs, Azure OpenAI, Figma MCP, Jira API, Confluence API — **Award: AI Build Challenge Consolation 1st Prize**
 - Quality Management System (QMS) — React.js, Turbo Repo, Module Federation, TanStack, shadcn/ui, Zustand, Storybook, Jest
@@ -77,16 +79,17 @@ For launch, populate with ArcSync and leave 2–3 placeholder slots clearly mark
 
 Split the flat stack list into 4 labelled groups:
 
-| Group | Technologies |
-|---|---|
-| Frontend | React.js, TypeScript, Tailwind CSS, shadcn/ui, Zustand, TanStack (Query · Router · Forms), Vite, Module Federation, Turbo Repo, Vue.js 3 |
-| Backend | .NET 10 / C# 13, ASP.NET Core (Minimal APIs), Entity Framework Core 10, Vertical Slice Architecture, CQRS / MediatR, FluentValidation, PostgreSQL + pgvector |
-| AI & Cloud (Azure) | Azure OpenAI · Semantic Kernel 1.71, Azure Document Intelligence, Azure AI Translation, Azure AI Search, Azure Service Bus, Azure Blob Storage, Azure Container Apps, Azure Bicep |
-| DevOps & Tooling | GitHub Actions (CI/CD), Docker, .NET Aspire, Electron, Storybook, xUnit, Jest |
+| Group              | Technologies                                                                                                                                                                 |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend           | React.js, TypeScript, Tailwind CSS, shadcn/ui, Zustand, TanStack (Query · Router · Forms), Vite, Module Federation, Turbo Repo, Vue.js 3                                     |
+| Backend            | .NET 10 / C# 13, ASP.NET Core (Minimal APIs), Entity Framework Core 10, Vertical Slice Architecture, CQRS / MediatR, FluentValidation, PostgreSQL + pgvector                 |
+| AI & Cloud (Azure) | Azure OpenAI · Semantic Kernel, Azure Document Intelligence, Azure AI Translation, Azure AI Search, Azure Service Bus, Azure Blob Storage, Azure Container Apps, Azure Bicep |
+| DevOps & Tooling   | GitHub Actions (CI/CD), Docker, .NET Aspire, Electron, Storybook, xUnit, Jest                                                                                                |
 
 ### Certifications section (new)
 
 **Completed:**
+
 - HuggingFace: AI Agents Course (smolagents, LangGraph, LlamaIndex)
 - Anthropic: Claude Code in Action · Claude Code 101 · Claude 101
 - Microsoft AZ-900: Azure Fundamentals
@@ -95,6 +98,7 @@ Split the flat stack list into 4 labelled groups:
 - IBM: Introduction to Web Development with HTML, CSS, JavaScript · Developing Front-End Apps with React · Developing Back-End Apps with Node.js and Express
 
 **In Progress / Planned:**
+
 - Microsoft AI-102: Azure AI Engineer Associate
 - Microsoft AZ-305: Azure Solutions Architect Expert (following AI-102)
 - Anthropic: Claude Architect Certification (targeted)
@@ -109,6 +113,7 @@ Render completed certs as solid cards and in-progress certs as outlined/muted ca
 All content below is taken from the actual resume. Use this verbatim.
 
 ### Personal info
+
 - **Name:** P Aneeshram Bhat
 - **Title:** Software Developer (Full-stack, React specialist)
 - **Location:** Mangalore, India
@@ -119,17 +124,20 @@ All content below is taken from the actual resume. Use this verbatim.
 - **Domain:** `.vercel.app` at launch
 
 ### Hero copy (rewrite from placeholder)
+
 ```
-Full-stack Software Engineer with nearly 2 years of experience building 
-production web applications and cloud-native systems. React.js specialist 
-with hands-on backend and Azure experience; currently co-building a 
+Full-stack Software Engineer with nearly 2 years of experience building
+production web applications and cloud-native systems. React.js specialist
+with hands-on backend and Azure experience; currently co-building a
 multi-tenant AI platform using Semantic Kernel, pgvector, and ASP.NET Core 10.
 ```
 
 ### Experience
+
 **EG** · Software Developer · Aug 2024 – Present · Mangalore, India
 
 Key bullets:
+
 - Co-architected multi-tenant document ingestion and AI search features on a shared AI services platform using ASP.NET Core 10, Azure Service Bus, pgvector, and Microsoft Semantic Kernel; built the full ingestion worker pipeline.
 - Built and shipped ArcSync, award-winning Electron + React desktop agent integrating Figma MCP, Jira, Confluence, and Azure OpenAI; automated frontend/backend story generation and bulk Jira backlog sync.
 - Built async AI document translation pipeline supporting multiple extensions using Azure Document Intelligence and AI Translation.
@@ -139,23 +147,29 @@ Key bullets:
 - Worked across 4 codebases with overall 93% merge rate.
 
 ### Education
+
 **B.E., Computer Science and Engineering**
 NMAM Institute of Technology (NMAMIT), Nitte — Udupi District, India
 Dec 2020 – 2024 · CGPA: 9.06
 
 ### Terminal filesystem (`FS` object in `terminal.tsx`)
+
 Update the static text files to reflect real data:
+
 - `about.txt` → real name, role, location, profile summary
 - `projects.txt` → ArcSync, AI Platform, QMS, Legacy Revival
 - `resume.txt` → real experience + education + stack
 - `contact.txt` → real email, real GitHub/LinkedIn placeholders
 
 ### Ask widget stub message
+
 Replace the `window.claude.complete()` call with a stub that returns:
+
 ```
 // AI assistant is offline in this build.
 // Coming soon — email aneeshram19@gmail.com in the meantime.
 ```
+
 Same stub in the terminal `ask` command.
 
 ---
@@ -183,6 +197,7 @@ styles/
 ```
 
 Key mixins to extract into `_mixins.scss`:
+
 ```scss
 @mixin glass-surface($opacity: 86%) {
   background: color-mix(in oklab, var(--paper) #{$opacity}, transparent);
@@ -273,10 +288,10 @@ export interface Project {
   desc: string;
   tag: string;
   tech: string[];
-  link?: string;           // undefined = no public link
-  linkLabel?: string;      // 'GitHub' | 'Live' | 'Demo' | '// repo private'
-  award?: string;          // e.g. 'AI Build Challenge · Consolation 1st Prize'
-  isPersonal: boolean;     // true = Personal Projects section; false = Work (under Experience)
+  link?: string; // undefined = no public link
+  linkLabel?: string; // 'GitHub' | 'Live' | 'Demo' | '// repo private'
+  award?: string; // e.g. 'AI Build Challenge · Consolation 1st Prize'
+  isPersonal: boolean; // true = Personal Projects section; false = Work (under Experience)
 }
 
 export interface CvEntry {
@@ -284,7 +299,7 @@ export interface CvEntry {
   role: string;
   where: string;
   bullets: string[];
-  type: 'work' | 'education';
+  type: "work" | "education";
 }
 
 export interface StackGroup {
@@ -295,7 +310,7 @@ export interface StackGroup {
 export interface Cert {
   title: string;
   issuer: string;
-  status: 'completed' | 'in-progress' | 'planned';
+  status: "completed" | "in-progress" | "planned";
 }
 ```
 
@@ -306,6 +321,7 @@ export interface Cert {
 Next.js App Router is server-first. Every component that uses `useState`, `useEffect`, `localStorage`, event handlers, or browser APIs needs `'use client'` at the top.
 
 For this portfolio, the cleanest approach is:
+
 - Mark `app/page.tsx` as `'use client'` and render `<App />` from it
 - All components under `components/` are client components by inheritance — no need to add `'use client'` to each one individually
 - `lib/data.ts` and `lib/claude.ts` are pure modules — no directive needed
@@ -318,13 +334,23 @@ The only server component is `app/layout.tsx` (metadata, font injection, HTML sh
 
 ```ts
 export const metadata: Metadata = {
-  title: 'Aneeshram Bhat — Software Developer',
-  description: 'Full-stack Software Engineer building production web apps and cloud-native systems. React specialist with Azure and AI platform experience. Based in Mangalore, India.',
-  keywords: ['software developer', 'React', 'ASP.NET Core', 'Azure', 'Semantic Kernel', 'full-stack', 'Mangalore'],
+  title: "Aneeshram Bhat — Software Developer",
+  description:
+    "Full-stack Software Engineer building production web apps and cloud-native systems. React specialist with Azure and AI platform experience. Based in Mangalore, India.",
+  keywords: [
+    "software developer",
+    "React",
+    "ASP.NET Core",
+    "Azure",
+    "Semantic Kernel",
+    "full-stack",
+    "Mangalore",
+  ],
   openGraph: {
-    title: 'Aneeshram Bhat — Software Developer',
-    description: 'Full-stack engineer · React · Azure · AI platforms · Mangalore, India',
-    type: 'website',
+    title: "Aneeshram Bhat — Software Developer",
+    description:
+      "Full-stack engineer · React · Azure · AI platforms · Mangalore, India",
+    type: "website",
   },
 };
 ```
@@ -334,7 +360,7 @@ export const metadata: Metadata = {
 ## `next.config.ts`
 
 ```ts
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // SCSS support is built-in with 'sass' installed — no extra config needed
@@ -349,6 +375,7 @@ export default nextConfig;
 ## Execution Phases
 
 ### Phase 1 — Scaffold
+
 1. `pnpm create next-app@latest aneesh-portfolio --typescript --app --no-tailwind --no-eslint --src-dir=no`
 2. `cd aneesh-portfolio`
 3. `pnpm add sass`
@@ -357,11 +384,13 @@ export default nextConfig;
 6. Create `.env.local.example` with `ANTHROPIC_API_KEY=` comment
 
 ### Phase 2 — Data layer
+
 1. Create `lib/data.ts` with all typed constants — real resume content
 2. Create `lib/claude.ts` with stubbed `complete()` returning offline message
 3. No `window.*` globals anywhere — all data imported directly
 
 ### Phase 3 — SCSS migration
+
 1. Create all 13 SCSS partials under `styles/`
 2. Port every rule from the original `styles.css` into the correct partial
 3. Add nesting, extract mixins — no visual changes
@@ -370,6 +399,7 @@ export default nextConfig;
 6. Verify: load app, both modes should look identical to original
 
 ### Phase 4 — Component migration
+
 Migrate in dependency order (leaf components first):
 
 1. `components/TweaksPanel.tsx` — no dependencies
@@ -386,17 +416,20 @@ Migrate in dependency order (leaf components first):
 12. `components/App.tsx` — depends on Desktop, Web, TweaksPanel
 
 For each component:
+
 - Remove `window.` globals — import from `lib/data.ts` instead
 - Add TypeScript types for all props
 - Remove `window.X = X` export pattern — use ES module exports
 - Replace `React.useState` / `React.useEffect` with direct imports (`import { useState, useEffect } from 'react'`)
 
 ### Phase 5 — Next.js wiring
+
 1. `app/layout.tsx` — metadata, `next/font/google` for all 3 fonts, import `styles/globals.scss`, set `lang="en"`, `data-theme` and `data-variant` defaults on `<html>`
 2. `app/page.tsx` — `'use client'`, render `<App />`
 3. Verify `localStorage` access is guarded with `typeof window !== 'undefined'` checks (SSR safety) — or use `'use client'` + `useEffect` pattern
 
 ### Phase 6 — Content + QA
+
 1. Confirm all real content is in `lib/data.ts` and rendered correctly in both modes
 2. Test Desktop mode: open/close/drag all windows, terminal all commands, theme toggle, wallpaper change, mode switch
 3. Test Web mode: all sections present, correct order, mobile responsive
@@ -441,12 +474,12 @@ For each component:
 
 The following files from the original prototype are the implementation reference. Read them before starting each phase:
 
-| File | Reference for |
-|---|---|
-| `app.jsx` | Root App component, theme/mode state, topbar, keyboard shortcuts, TweaksPanel wiring |
-| `desktop.jsx` | Window manager, draggable icons, dock, context menu, all desktop logic |
-| `web.jsx` | Web mode sections, AskWidget, hero, CV data shape, footer |
-| `apps.jsx` | All window app content components, PROJECTS/STACK/POSTS data shape |
-| `terminal.jsx` | Terminal FS object, all commands, history navigation, ASCII art |
-| `tweaks-panel.jsx` | TweaksPanel, useTweaks hook, all Tweak* components — remove postMessage calls |
-| `styles.css` | Complete styling reference — every class, variable, and media query to migrate to SCSS |
+| File               | Reference for                                                                          |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| `app.jsx`          | Root App component, theme/mode state, topbar, keyboard shortcuts, TweaksPanel wiring   |
+| `desktop.jsx`      | Window manager, draggable icons, dock, context menu, all desktop logic                 |
+| `web.jsx`          | Web mode sections, AskWidget, hero, CV data shape, footer                              |
+| `apps.jsx`         | All window app content components, PROJECTS/STACK/POSTS data shape                     |
+| `terminal.jsx`     | Terminal FS object, all commands, history navigation, ASCII art                        |
+| `tweaks-panel.jsx` | TweaksPanel, useTweaks hook, all Tweak\* components — remove postMessage calls         |
+| `styles.css`       | Complete styling reference — every class, variable, and media query to migrate to SCSS |

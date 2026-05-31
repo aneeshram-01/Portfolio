@@ -4,6 +4,7 @@ import {
   PROFILE, HERO, CV, STACK, PERSONAL_PROJECTS, WORK_PROJECTS,
   COMPLETED_CERTS, PLANNED_CERTS,
 } from '@/lib/data';
+import Headshot from '@/components/Headshot';
 import type { ThemeApi } from '@/lib/types';
 
 // ── Ask widget ────────────────────────────────────────────────────
@@ -84,10 +85,16 @@ export default function Web({ themeApi }: Props) {
       {/* ── Hero ── */}
       <header className="web-hero">
         <div className="web-eyebrow">Software Developer · Full-stack · Mangalore, IN</div>
-        <h1>
-          Aneesh builds <em>production systems</em>,<br />
-          with <em>clarity</em>.
-        </h1>
+
+        {/* h1 + portrait side-by-side — image height tracks h1 height via flex-stretch */}
+        <div className="web-hero-h1-row">
+          <h1>
+            Aneesh builds <em>production systems</em>,<br />
+            with <em>clarity</em>.
+          </h1>
+          <Headshot variant="web" width="auto" className="web-hero-headshot" />
+        </div>
+
         <p className="lede">{HERO}</p>
         <div className="meta">
           <span>

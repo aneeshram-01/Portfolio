@@ -90,7 +90,7 @@ export default function SettingsApp({ api }: Props) {
       <dl className="fact-list">
         <dt>⌘ E</dt><dd>Toggle Desktop / Web mode</dd>
         <dt>⌘ D</dt><dd>Toggle dark / light</dd>
-        <dt>Ctrl `</dt><dd>Open Terminal</dd>
+        <dt>⌘ Alt T</dt><dd>Open Terminal</dd>
         <dt>⌘ ,</dt><dd>Open Settings</dd>
         <dt>⌘ .</dt><dd>Reorganize desktop icons</dd>
         <dt>Esc</dt><dd>Close focused window</dd>

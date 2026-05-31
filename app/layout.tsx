@@ -61,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-theme="dark"
       data-variant="glass"
       className={`${instrumentSerif.variable} ${jetBrainsMono.variable} ${interTight.variable}`}
+      suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: antiFlashScript }} />

@@ -1,5 +1,5 @@
 // Stubbed AI client. The Ask widget (web) and terminal `ask` command both call
-// `complete()`. At launch there is no API call — it resolves to an offline notice.
+// `complete()`. At launch there is no API call — resolve to an offline notice.
 //
 // Future: wire this to a Next.js `/api/ask` route backed by ANTHROPIC_API_KEY.
 // See .env.local.example and PORTFOLIO_MIGRATION.md § Out of Scope.
