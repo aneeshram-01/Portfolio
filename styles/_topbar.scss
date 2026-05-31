@@ -1,0 +1,119 @@
+// ─────────────────────────────────────────────────────────────────
+//  Top bar — brand, mode switcher, clock, icon buttons.
+// ─────────────────────────────────────────────────────────────────
+@use "mixins" as *;
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+
+  [data-variant="glass"] & {
+    @include glass-topbar;
+    border-bottom: 1px solid var(--rule);
+  }
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-brand {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 2px;
+    box-shadow: 1px 1px 0 var(--ink);
+
+    [data-variant="glass"] & {
+      border-radius: 50%;
+      box-shadow: none;
+    }
+  }
+}
+
+.modes {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px;
+  gap: 0;
+  background: var(--paper-2);
+
+  button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.02em;
+
+    &.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .ico {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+.icon-btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.08s ease;
+
+  &:hover {
+    background: var(--paper-2);
+  }
+
+  &:active {
+    transform: translate(1px, 1px);
+  }
+}
+
+.clock {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}

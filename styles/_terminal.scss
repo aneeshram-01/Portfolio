@@ -1,0 +1,79 @@
+// ─────────────────────────────────────────────────────────────────
+//  Terminal — shell, coloured lines, prompt, input, cursor.
+// ─────────────────────────────────────────────────────────────────
+
+.term {
+  background: #0c0a07;
+  color: #e8dfc7;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  height: 100%;
+  padding: 14px 16px;
+  overflow: auto;
+
+  [data-theme="dark"] & {
+    background: #050402;
+  }
+
+  .line {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt-line {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+  }
+
+  .prompt {
+    color: #d94d2a;
+    flex-shrink: 0;
+  }
+
+  .input {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    flex: 1;
+    outline: none;
+    caret-color: #d94d2a;
+  }
+
+  .out {
+    color: #c9c0a8;
+  }
+
+  .ok {
+    color: #6ddc8c;
+  }
+
+  .err {
+    color: #ff9b85;
+  }
+
+  .accent {
+    color: #ffd28a;
+  }
+
+  .dim {
+    color: #6b6357;
+  }
+
+  .ascii {
+    color: #d94d2a;
+  }
+
+  .cursor::after {
+    content: "▌";
+    color: #d94d2a;
+    animation: blink 1s steps(1) infinite;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

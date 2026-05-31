@@ -1,0 +1,36 @@
+// ─────────────────────────────────────────────────────────────────
+//  Reusable mixins. Pure helpers — no CSS is emitted unless included.
+//  Bring into a partial with:  @use 'mixins' as *;
+// ─────────────────────────────────────────────────────────────────
+
+// Frosted-glass surface used by windows, dock, context menu, notifications.
+@mixin glass-surface($opacity: 86%) {
+  background: color-mix(in oklab, var(--paper) #{$opacity}, transparent);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 0.5px solid var(--rule);
+}
+
+// Lighter blur for the fixed top bar (no full border).
+@mixin glass-topbar {
+  background: color-mix(in oklab, var(--paper) 80%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+// Hard paper drop-shadow → maps to the --shadow-sm/md/lg tokens.
+@mixin hard-shadow($size: sm) {
+  box-shadow: var(--shadow-#{$size});
+}
+
+@mixin font-mono {
+  font-family: var(--font-mono);
+}
+
+@mixin font-display {
+  font-family: var(--font-display);
+}
+
+@mixin font-body {
+  font-family: var(--font-body);
+}

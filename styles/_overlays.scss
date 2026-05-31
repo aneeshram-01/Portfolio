@@ -1,0 +1,377 @@
+// ─────────────────────────────────────────────────────────────────
+//  Overlays — mobile nudge, context menu, cookie banner,
+//  system notification, mobile-block modal.
+// ─────────────────────────────────────────────────────────────────
+@use "mixins" as *;
+
+// ── Mobile nudge ──
+.nudge {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  max-width: calc(100vw - 32px);
+
+  button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--paper);
+    opacity: 0.6;
+    cursor: pointer;
+    padding: 0 2px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// ── Context menu ──
+.ctxmenu {
+  position: fixed;
+  z-index: 200;
+  min-width: 220px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+
+  [data-variant="glass"] & {
+    @include glass-surface(88%);
+  }
+}
+
+.ctxmenu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: inherit;
+
+  &:hover:not(.disabled) {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:hover .ctxmenu-shortcut {
+    color: color-mix(in oklab, var(--accent-ink) 80%, transparent);
+  }
+}
+
+.ctxmenu-shortcut {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.ctxmenu-sep {
+  height: 1px;
+  background: var(--rule);
+  margin: 4px 4px;
+}
+
+// ── Cookie banner (web mode) ──
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  border-top: 2px solid var(--accent);
+  animation: cookie-slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.cookie-text {
+  flex: 1;
+  line-height: 1.6;
+
+  strong {
+    color: var(--accent);
+  }
+}
+
+.cookie-btn {
+  appearance: none;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.82;
+  }
+}
+
+@keyframes cookie-slide-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// ── System notification (desktop mode) ──
+.sys-notif {
+  position: fixed;
+  top: 48px;
+  right: 16px;
+  z-index: 900;
+  width: 290px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: notif-slide-in 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+
+  [data-variant="glass"] & {
+    @include glass-surface(88%);
+  }
+}
+
+.sys-notif-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 10px 6px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sys-notif-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sys-notif-appname {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.sys-notif-time {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.sys-notif-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+  line-height: 1;
+
+  &:hover {
+    color: var(--ink);
+  }
+}
+
+.sys-notif-body {
+  padding: 10px 12px 12px;
+}
+
+.sys-notif-title {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.sys-notif-msg {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@keyframes notif-slide-in {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// ── Mobile: desktop block overlay ──
+.mobile-block-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: color-mix(in oklab, var(--paper) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.mobile-block-card {
+  width: 100%;
+  max-width: 360px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: notif-slide-in 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+
+  [data-variant="glass"] & {
+    @include glass-surface(90%);
+  }
+}
+
+.mobile-block-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.mobile-block-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mobile-block-appname {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.mobile-block-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--muted);
+}
+
+.mobile-block-body {
+  padding: 18px 18px 10px;
+}
+
+.mobile-block-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.mobile-block-msg {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.mobile-block-actions {
+  padding: 14px 16px 18px;
+}
+
+.mobile-block-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  appearance: none;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.88;
+  }
+
+  &:active {
+    opacity: 0.72;
+  }
+}

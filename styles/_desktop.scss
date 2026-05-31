@@ -1,0 +1,141 @@
+// ─────────────────────────────────────────────────────────────────
+//  Desktop shell — wallpaper patterns, desktop icons, drag states.
+// ─────────────────────────────────────────────────────────────────
+
+.desktop {
+  position: fixed;
+  inset: 36px 0 0 0;
+  background: var(--paper);
+  overflow: hidden;
+
+  // Refresh ripple
+  &.refreshing .wallpaper {
+    animation: wp-pulse 0.35s ease-out;
+  }
+}
+
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wp-dots {
+  background-image: radial-gradient(var(--rule) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.wp-grid {
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.wp-paper {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 28px,
+    color-mix(in oklab, var(--ink) 4%, transparent) 28px 29px
+  );
+}
+
+.wp-warm {
+  background:
+    radial-gradient(
+      60% 60% at 80% 10%,
+      color-mix(in oklab, var(--accent) 20%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      70% 70% at 10% 100%,
+      color-mix(in oklab, var(--accent) 12%, transparent),
+      transparent 60%
+    );
+}
+
+@keyframes wp-pulse {
+  0% {
+    opacity: 0.2;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ── Desktop icons (left edge) ──
+.desktop-icons {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(1, 78px);
+  z-index: 1;
+}
+
+.dicon {
+  width: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 4px;
+  border-radius: 8px;
+  text-align: center;
+
+  &:hover {
+    background: color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+
+  &.active {
+    background: color-mix(in oklab, var(--accent) 20%, transparent);
+  }
+
+  .glyph {
+    width: 44px;
+    height: 44px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .name {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-shadow: 0 1px 0 var(--paper);
+  }
+
+  // Selected icon
+  &.selected {
+    background: color-mix(in oklab, var(--accent) 22%, transparent);
+
+    .glyph {
+      box-shadow: 0 0 0 2px var(--accent), var(--shadow-sm);
+    }
+  }
+
+  // Dragging icon state
+  &.dragging {
+    opacity: 0.72;
+
+    .glyph {
+      box-shadow: 0 0 0 2px var(--accent), var(--shadow-sm);
+      background: color-mix(in oklab, var(--accent) 10%, var(--paper));
+    }
+  }
+}

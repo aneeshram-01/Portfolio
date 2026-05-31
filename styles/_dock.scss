@@ -1,0 +1,87 @@
+// ─────────────────────────────────────────────────────────────────
+//  Dock — dock items, running indicator, separator.
+// ─────────────────────────────────────────────────────────────────
+@use "mixins" as *;
+
+.dock {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 6px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  z-index: 5;
+
+  [data-variant="glass"] & {
+    @include glass-surface(65%);
+    border-radius: 18px;
+  }
+}
+
+.dock-item {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11px;
+  position: relative;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+
+  &:hover {
+    transform: translateY(-4px) scale(1.06);
+  }
+
+  .label {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  &:hover .label {
+    opacity: 1;
+  }
+
+  &.running::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+}
+
+// Dock separator
+.dock-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--rule);
+  margin: 2px 4px;
+}

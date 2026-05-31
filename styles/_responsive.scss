@@ -1,0 +1,97 @@
+// ─────────────────────────────────────────────────────────────────
+//  Responsive — all @media breakpoints (720px, 600px).
+//  Kept last in the cascade so overrides win. Order preserved 1:1.
+// ─────────────────────────────────────────────────────────────────
+
+// Web responsive add-ons
+@media (max-width: 720px) {
+  .web-photos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .web-cv .web-cv-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .wp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Cookie banner on mobile
+@media (max-width: 600px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px 18px 20px;
+  }
+  .cookie-btn {
+    text-align: center;
+    padding: 12px;
+  }
+}
+
+// Sys-notif on mobile
+@media (max-width: 720px) {
+  .sys-notif {
+    top: 56px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}
+
+// General mobile layout
+@media (max-width: 720px) {
+  .desktop-icons {
+    display: none;
+  }
+  .dock {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    transform: none;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  .window {
+    position: absolute !important;
+    inset: 8px 8px 76px 8px !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .web {
+    padding: 64px 18px 100px;
+  }
+  .web-hero h1 {
+    font-size: clamp(40px, 12vw, 80px);
+  }
+  .web-section-h {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .web-proj {
+    grid-template-columns: 30px 1fr;
+  }
+  .web-proj-tag,
+  .web-proj-year {
+    display: none;
+  }
+  .topbar {
+    padding: 0 8px;
+    height: 44px;
+  }
+  .topbar .topbar-brand .name {
+    display: none;
+  }
+  .clock {
+    display: none;
+  }
+}

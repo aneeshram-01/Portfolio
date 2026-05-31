@@ -1,0 +1,66 @@
+// ─────────────────────────────────────────────────────────────────
+//  Baseline reset + global element defaults.
+// ─────────────────────────────────────────────────────────────────
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  overscroll-behavior: none;
+
+  &[data-mode="web"] {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+// Subtle scrollbars (shared by window bodies, terminal, web view).
+.window-body,
+.term,
+.web {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.window-body,
+.term {
+  &::-webkit-scrollbar-thumb {
+    background: var(--rule);
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}

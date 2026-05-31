@@ -1,0 +1,19 @@
+// ─────────────────────────────────────────────────────────────────
+//  Global stylesheet entry point.
+//  Imported once in app/layout.tsx. Partial order = CSS cascade order;
+//  _responsive stays last so its overrides win.
+// ─────────────────────────────────────────────────────────────────
+
+@use "mixins"; // helpers only — emits no CSS
+@use "tokens";
+@use "reset";
+@use "topbar";
+@use "desktop";
+@use "window";
+@use "dock";
+@use "apps";
+@use "terminal";
+@use "web";
+@use "overlays";
+@use "tweaks";
+@use "responsive";

@@ -1,0 +1,56 @@
+// ─────────────────────────────────────────────────────────────────
+//  Design tokens — CSS custom properties.
+//  Aesthetic: warm paper + ink + vermilion. Two variants share tokens.
+//  Light theme (default), dark theme, and the glass console variant.
+// ─────────────────────────────────────────────────────────────────
+
+:root {
+  --paper: #f4efe6;
+  --paper-2: #ebe4d6;
+  --ink: #15120e;
+  --ink-2: #2a2620;
+  --muted: #6b6357;
+  --line: #1a1612;
+  --rule: rgba(21, 18, 14, 0.14);
+  --accent: #d94d2a;
+  --accent-ink: #fff;
+  --good: #2f7d52;
+  --warn: #c98a23;
+  --shadow-sm: 2px 2px 0 var(--ink);
+  --shadow-md: 4px 4px 0 var(--ink);
+  --shadow-lg: 6px 6px 0 var(--ink);
+  --radius: 6px;
+  --radius-lg: 10px;
+
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: "Inter Tight", system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="dark"] {
+  --paper: #14110d;
+  --paper-2: #1d1914;
+  --ink: #f3ecdd;
+  --ink-2: #d6cdb9;
+  --muted: #8a8273;
+  --line: #2c2620;
+  --rule: rgba(243, 236, 221, 0.14);
+  --shadow-sm: 2px 2px 0 #000;
+  --shadow-md: 4px 4px 0 #000;
+  --shadow-lg: 6px 6px 0 #000;
+}
+
+// ── Glass console variant: thinner chrome, no hard shadow ──
+[data-variant="glass"] {
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 1px 0 rgba(0, 0, 0, 0.04), 0 14px 40px rgba(0, 0, 0, 0.14);
+  --shadow-lg: 0 1px 0 rgba(0, 0, 0, 0.04), 0 24px 60px rgba(0, 0, 0, 0.18);
+  --radius: 12px;
+  --radius-lg: 18px;
+}
+
+[data-variant="glass"][data-theme="dark"] {
+  --shadow-sm: 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 1px 0 rgba(255, 255, 255, 0.04), 0 14px 40px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 1px 0 rgba(255, 255, 255, 0.04), 0 24px 60px rgba(0, 0, 0, 0.7);
+}
