@@ -1,17 +1,32 @@
-// Stubbed AI client. The Ask widget (web) and terminal `ask` command both call
-// `complete()`. At launch there is no API call — resolve to an offline notice.
-//
-// Future: wire this to a Next.js `/api/ask` route backed by ANTHROPIC_API_KEY.
-// See .env.local.example and PORTFOLIO_MIGRATION.md § Out of Scope.
+// AI client — calls /api/ask which hits OpenRouter server-side.
+// Falls back to OFFLINE_MESSAGE on any network or config error.
 
-export const OFFLINE_MESSAGE = `// AI assistant is offline in this build.
-// Coming soon — email aneeshram19@gmail.com in the meantime.`;
+export const OFFLINE_MESSAGE =
+  '// AI assistant is offline in this build.\n' +
+  '// Coming soon — email aneeshram19@gmail.com in the meantime.';
+
+export const RATE_LIMIT_MESSAGE =
+  '// rate limit reached — you\'ve used all 10 questions for this hour.\n' +
+  '// come back later, or reach out directly: aneeshram19@gmail.com';
 
 /**
- * Stubbed completion. Accepts a prompt (ignored) and resolves to the offline
- * message after a tiny delay so callers' "thinking" UI still flashes naturally.
+ * Send a question to /api/ask and return the reply string.
+ * Always resolves — errors fall back to OFFLINE_MESSAGE so callers
+ * don't need their own try/catch.
  */
-export async function complete(_prompt?: string): Promise<string> {
-  await new Promise((resolve) => setTimeout(resolve, 350));
-  return OFFLINE_MESSAGE;
+export async function complete(question: string): Promise<string> {
+  try {
+    const res = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question }),
+    });
+
+    if (!res.ok) return OFFLINE_MESSAGE;
+
+    const data = await res.json();
+    return data.reply ?? OFFLINE_MESSAGE;
+  } catch {
+    return OFFLINE_MESSAGE;
+  }
 }
